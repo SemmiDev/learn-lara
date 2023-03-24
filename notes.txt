@@ -1,0 +1,21 @@
+# setup laravel
+
+- laravel new app-name
+- cd app-name
+- php artisan serve
+
+# create model
+- php artisan make:model Post
+- php artisan make:model Post -m
+
+
+# create controller
+- php artisan make:controller PostController
+- php artisan make:controller PostController --resource
+
+--resource = create all methods
+--invokable = create only one method
+
+
+# endpoints
+/tasks = get all categories
