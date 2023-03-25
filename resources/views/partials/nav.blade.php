@@ -15,7 +15,9 @@
           <a
           href="/tasks/new"
           class="items-center flex gap-1 p-2 border">
-          <i class="bi bi-plus-square"></i>
+          <img src = "/add.svg" alt="add"
+          class="w-5 h-5 fill-current stroke-white stroke-2"
+          />
           New
         </a>
         </li>
@@ -37,7 +39,12 @@
             </a>
           </li>
           <li><a>Settings</a></li>
-          <li><a>Logout</a></li>
+          <li>
+            <form action="/logout" method="post">
+            @csrf
+            <button type="submit">Logout</button>
+            </form>
+          </li>
         </ul>
       </div>
   </div>

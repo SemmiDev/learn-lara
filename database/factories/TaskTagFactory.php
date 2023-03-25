@@ -17,8 +17,8 @@ class TaskTagFactory extends Factory
     public function definition(): array
     {
         return [
-            'task_id' => $this->faker->numberBetween(1, 10),
-            'tag_id' => $this->faker->numberBetween(1, 10),
+            'task_id' => $this->faker->unique()->numberBetween(1, 100),
+            'tag_id' => $this->faker->unique()->numberBetween(1, 100),
         ];
     }
 }

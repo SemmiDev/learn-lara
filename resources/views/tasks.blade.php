@@ -19,34 +19,37 @@
   </div>
 @endif
 
-<form action="/search" class="mb-5 scale-95 flex justify-end" method="get">
-  @csrf
-  <input type="text" name="category" value="{{request('category')}}" hidden>
-  <input type="text" name="keyword" required placeholder="Search.." class="input input-bordered input-sm w-full max-w-xs" />
-  <input type="submit" hidden>
-</form>
-
 @foreach ($tasks as $task)
-<div class="flex flex-col gap-2">
+<div class="flex flex-col gap-2 md:p-0">
   <a
 href="/tasks/{{ $task->id }}"
 class="flex flex-col gap-x-2">
-    <div class="space-y-3 p-5 rounded-lg border bg-gray-800 hover:bg-gray-900  text-yellow-500 transition-all duration-100 ease-linear shadow shadow-lg hover:scale-100 scale-95">
+    <div class="space-y-3 p-7 rounded-lg border text-yellow-500 transition-all duration-100 ease-linear shadow shadow-lg hover:scale-100 scale-95">
         <div class="flex items-center justify-between">
+          <div class="flex flex-col gap-y-1">
             <h1 class="text-3xl items-center leading-relaxed font-bold">{{ $task->name }}</h1>
-            <span class="text-xs  text-slate-900">{{ $task->priority }}</span>
+            <span class="text-xs text-success">{{
+              $task->completed == 1 ? 'Completed' : 'Not Completed'
+            }}</span>
+            <span class="text-xs text-gray-800">{{
+              $task->created_at->diffForHumans()
+            }}</span>
+          </div>
+            <span class="text-xs text-success">{{ $task->priority }}</span>
         </div>
 
         <div class="flex flex-wrap gap-1">
         @foreach ($task->tags as $tag)
             <a
             href="/tasks/tags/{{ $tag->name }}"
-            class="rounded-full hover:bg-secondary px-3 py-1 text-xs bg-info text-black">
+            class="rounded-full  hover:bg-secondary px-3 py-1 text-xs bg-info text-black">
                 {{ $tag->name }}
             </a>
         @endforeach
     </div>
-    <p class="text-info">{{ $task->description }}</p>
+    <p class="text-info">
+        {{ Str::limit(strip_tags($task->description), 250) }}
+    </p>
 </div>
 </a>
 @endforeach
